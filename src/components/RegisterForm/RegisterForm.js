@@ -1,11 +1,17 @@
-import { Button, TextField, Box, Typography } from '@mui/material';
+import { TextField, Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/operations';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import useInput from 'hooks/useInput';
+import Button from '../UI/LinkButton/LinkButton';
+import './RegisterForm.css';
 export const RegisterForm = () => {
+  const userName = useInput('');
+  const userSurname = useInput('');
+  const userEmail = useInput('');
+  const userPassword = useInput('');
   const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,23 +19,25 @@ export const RegisterForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const name = e.target.elements.name.value;
-    const surname = e.target.elements.surname.value;
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-
-    dispatch(register({ name: `${name} ${surname}`, email, password }));
+    dispatch(
+      register({
+        name: `${userName.value} ${userSurname.value}`,
+        email: userEmail.value,
+        password: userPassword.value,
+      })
+    );
     form.reset();
     toast.success('User is registered');
     setRedirect(true);
   };
+
   if (redirect) {
     navigate('/login');
   }
   return (
     <Box>
       <form onSubmit={handleSubmit}>
-        <Typography variant="h6">Register</Typography>
+        <Typography variant="h6">Sing Up</Typography>
         <TextField
           label="Name"
           variant="outlined"
@@ -38,6 +46,7 @@ export const RegisterForm = () => {
           required
           type="text"
           name="name"
+          {...userName}
         />
         <TextField
           label="Surname"
@@ -47,6 +56,7 @@ export const RegisterForm = () => {
           required
           type="text"
           name="surname"
+          {...userSurname}
         />
         <TextField
           label="Email"
@@ -56,6 +66,7 @@ export const RegisterForm = () => {
           required
           type="email"
           name="email"
+          {...userEmail}
         />
         <TextField
           label="Password"
@@ -65,14 +76,10 @@ export const RegisterForm = () => {
           required
           type="password"
           name="password"
+          {...userPassword}
         />
 
-        <Button
-          sx={{ background: 'rgb(161 120 120)' }}
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
+        <Button className="buttonRegister" type="submit">
           Отправить
         </Button>
       </form>

@@ -8,6 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  pointer-events: none;
 }
 .modal__content {
   padding: 20px;
@@ -15,4 +17,8 @@
   background-color: rgba(255, 255, 255, 0.267);
   max-width: 40vw;
   text-align: center;
+}
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
 }

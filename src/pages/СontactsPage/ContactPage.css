@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 80px;
+}
+.container__filter {
+  padding: 30px;
+  background: #fff4;
+  border: 1px solid rgb(189 128 128);
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+}

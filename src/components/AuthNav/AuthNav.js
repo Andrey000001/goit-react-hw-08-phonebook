@@ -1,14 +1,31 @@
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { active } from '../../redux/modal/slice';
+import LinkButton from 'components/UI/LinkButton/LinkButton';
+import './AuthNav.css';
 export const AuthNav = () => {
+  const dispatch = useDispatch();
+  const handleSignupClick = () => {
+    dispatch(active());
+  };
   return (
-    <div>
-      <Button component={Link} to="/register" sx={{ color: '#fff' }}>
-        SingUp
-      </Button>
-      <Button component={Link} to="/login" sx={{ color: '#fff' }}>
+    <div className="authButtons">
+      <LinkButton
+        component={Link}
+        className="btnBar"
+        to="/register"
+        onClick={handleSignupClick}
+      >
+        SIGNUP
+      </LinkButton>
+      <LinkButton
+        component={Link}
+        className="btnBar"
+        to="/login"
+        onClick={handleSignupClick}
+      >
         LOGIN
-      </Button>
+      </LinkButton>
     </div>
   );
 };

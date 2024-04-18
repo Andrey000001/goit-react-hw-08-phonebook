@@ -1,6 +1,7 @@
 import ContactItem from 'components/ContactItem/ContactItem';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import './ContactList.css';
 export const ContactList = () => {
   const filterValue = useSelector(({ filter }) => filter);
   const contacts = useSelector(({ contacts }) => contacts.items);
@@ -11,7 +12,7 @@ export const ContactList = () => {
   }, [contacts, filterValue]);
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className="container_list">
       {contacts.length > 0 && (
         <>
           <h3>ContactList</h3>

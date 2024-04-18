@@ -1,9 +1,14 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/operations';
 import { toast } from 'react-toastify';
+import useInput from 'hooks/useInput';
+import LinkButton from 'components/UI/LinkButton/LinkButton';
+import './LoginForm.css';
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const userEmail = useInput('');
+  const userPassword = useInput('');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,6 +34,8 @@ export const LoginForm = () => {
           required
           type="email"
           name="email"
+          {...userEmail}
+          value={userEmail.value}
         />
         <TextField
           label="Password"
@@ -38,15 +45,12 @@ export const LoginForm = () => {
           fullWidth
           type="password"
           name="password"
+          {...userPassword}
+          value={userPassword.value}
         />
-        <Button
-          sx={{ background: 'rgb(161 120 120)' }}
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
+        <LinkButton className="buttonLogin" type="submit">
           Отправить
-        </Button>
+        </LinkButton>
       </form>
     </Box>
   );

@@ -1,0 +1,17 @@
+.containerHome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #6f5762;
+}
+
+.container_title {
+  font-size: 0;
+  opacity: 0;
+  transition: font-size 1s, opacity 1s;
+}
+.container_title.isVisible {
+  font-size: 3em;
+  opacity: 1;
+}

@@ -3,32 +3,30 @@ import { useEffect } from 'react';
 //hook
 import { useAuth } from 'hooks';
 //Modals
-import { Modal } from 'components/Modal/Modal';
+import { Modal } from 'pages/Modal/Modal';
 //Routes
 import { Route, Routes } from 'react-router-dom';
 //Components
 import СontactsPage from 'pages/СontactsPage/СontactsPage';
 import { Home } from 'pages/Home/Home';
-import { Loyout } from '../../components/Loyout';
+import { Loyout } from '../components/Loyout';
 import { EditForm } from 'components/EditForm/EditForm';
 import { LoginForm } from 'components/LoginForm/LoginForm';
 import { RegisterForm } from 'components/RegisterForm/RegisterForm';
-
-import { RestrictedRoute } from '../../components/RestrictedRoute';
-import { PrivateRoute } from '../../components/PrivateRoute';
+import { RestrictedRoute } from '../components/RestrictedRoute';
+import { PrivateRoute } from '../components/PrivateRoute';
 //operation
-import { refreshUser } from '../../redux/auth/operations';
+import { refreshUser } from '../redux/auth/operations';
+import BasicExample from 'components/Loader/Loader';
 
 export default function App() {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
-
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
-
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <BasicExample />
   ) : (
     <Routes>
       <Route path="/" element={<Loyout />}>
@@ -49,9 +47,7 @@ export default function App() {
           element={
             <RestrictedRoute
               redirectTo="/contacts"
-              component={
-                <Modal content={<LoginForm />} target="ModalRegister" />
-              }
+              component={<Modal content={<LoginForm />} target="ModalLogin" />}
             />
           }
         />
@@ -63,7 +59,12 @@ export default function App() {
         />
         <Route
           path="/change/:id"
-          element={<Modal content={<EditForm />} target="ModalEdit" />}
+          element={
+            <PrivateRoute
+              redirectTo="/login"
+              component={<Modal content={<EditForm />} target="ModalEdit" />}
+            />
+          }
         />
       </Route>
     </Routes>

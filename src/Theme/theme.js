@@ -7,8 +7,9 @@ export const theme = createTheme({
     secondary: {
       main: '#ffff',
     },
-    backgroundColor: {
-      main: 'transparent',
+
+    primaryBtn: {
+      main: 'rgb(161 120 120)',
     },
   },
 });

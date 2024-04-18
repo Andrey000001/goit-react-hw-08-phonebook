@@ -1,32 +1,22 @@
 import { ContactForm } from '../../components/ContactForm/ContactForm';
 import { ContactList } from '../../components/ContactList/ContactList';
 import { Filter } from '../../components/Filter/Filter';
+import './ContactPage.css';
+import { useSelector } from 'react-redux';
 const СontactsPage = () => {
+  const isModalOpen = useSelector(state => state.modal.isModalOpen);
+  console.log(isModalOpen);
+
   return (
-    <section>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          paddingTop: '80px',
-        }}
-      >
+    <>
+      <div className="container">
         <ContactForm />
-        <div
-          style={{
-            padding: '30px',
-            background: '#fff4',
-            border: '1px solid rgb(189 128 128)',
-            borderRadius: '5px',
-            maxWidth: '500px',
-            width: '100%',
-          }}
-        >
+        <div className="container__filter">
           <Filter />
           <ContactList />
         </div>
       </div>
-    </section>
+    </>
   );
 };
 export default СontactsPage;

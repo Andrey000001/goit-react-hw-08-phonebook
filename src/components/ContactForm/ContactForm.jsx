@@ -1,13 +1,14 @@
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { fetchContacts, addContact } from '../../redux/operations';
+import { fetchContacts, addContact } from '../../redux/reducers/operations';
 import { toast } from 'react-toastify';
+import LinkButton from 'components/UI/LinkButton/LinkButton';
 import {
   StyledForm,
-  ButtonForm,
   Label,
   StyledField,
+  ContainerBtn,
 } from './ContactForm.styled';
 import { useEffect } from 'react';
 
@@ -32,35 +33,39 @@ export const ContactForm = () => {
   };
 
   return (
-    <Formik initialValues={{ name: '', number: '' }} onSubmit={handleSubmit}>
-      <StyledForm>
-        <h3 style={{ textAlign: 'center' }}>Create new Contact</h3>
-        <Label>
-          Name
+    <>
+      <Formik initialValues={{ name: '', number: '' }} onSubmit={handleSubmit}>
+        <StyledForm>
+          <h3 style={{ textAlign: 'center' }}>Create new Contact</h3>
+          <Label>
+            Name
+            <br />
+            <StyledField
+              type="text"
+              name="name"
+              pattern="^[A-Za-z\s]+"
+              placeholder="Please enter only letters."
+              required
+            />
+          </Label>
           <br />
-          <StyledField
-            type="text"
-            name="name"
-            pattern="^[A-Za-z\s]+"
-            placeholder="Please enter only letters."
-            required
-          />
-        </Label>
-        <br />
-        <Label>
-          Number
+          <Label>
+            Number
+            <br />
+            <StyledField
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+              required
+              placeholder="Please enter 8 digits."
+            />
+          </Label>
           <br />
-          <StyledField
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-            required
-            placeholder="Please enter 8 digits."
-          />
-        </Label>
-        <br />
-        <ButtonForm type="submit">ADD CONTACT</ButtonForm>
-      </StyledForm>
-    </Formik>
+          <ContainerBtn style={{ textAlign: 'center' }}>
+            <LinkButton type="submit">ADD CONTACT</LinkButton>
+          </ContainerBtn>
+        </StyledForm>
+      </Formik>
+    </>
   );
 };
