@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { active } from '../../redux/modal/slice';
 import LinkButton from 'components/UI/LinkButton/LinkButton';
+import { active } from '../../redux/modal/slice';
 import './AuthNav.css';
 export const AuthNav = () => {
   const dispatch = useDispatch();

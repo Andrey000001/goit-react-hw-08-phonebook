@@ -1,23 +1,27 @@
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-//hook
-import { useAuth } from 'hooks';
-//Modals
-import { Modal } from 'pages/Modal/Modal';
-//Routes
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-//Components
-import СontactsPage from 'pages/СontactsPage/СontactsPage';
-import { Home } from 'pages/Home/Home';
-import { Loyout } from '../components/Loyout';
+
+// Components
+import BasicExample from 'components/Loader/Loader';
 import { EditForm } from 'components/EditForm/EditForm';
 import { LoginForm } from 'components/LoginForm/LoginForm';
 import { RegisterForm } from 'components/RegisterForm/RegisterForm';
-import { RestrictedRoute } from '../components/RestrictedRoute';
+import { Loyout } from '../components/Loyout';
 import { PrivateRoute } from '../components/PrivateRoute';
-//operation
+import { RestrictedRoute } from '../components/RestrictedRoute';
+
+// Hooks
+import { useAuth } from 'hooks';
+
+// Pages
+import { Modal } from 'pages/Modal/Modal';
+import { Home } from 'pages/Home/Home';
+import СontactsPage from 'pages/СontactsPage/СontactsPage';
+import NotFound from 'pages/Error/Error';
+
+// Operations
 import { refreshUser } from '../redux/auth/operations';
-import BasicExample from 'components/Loader/Loader';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -66,6 +70,7 @@ export default function App() {
             />
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

@@ -6,6 +6,7 @@ export const Home = () => {
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
   return (
     <div className="containerHome">
       <h1 className={`container_title ${isVisible ? 'isVisible' : ''}`}>
